@@ -19,6 +19,16 @@ const Paper = styled.div`
 
 // Main app structure
 class App extends Component {
+
+  /* fetch example start */
+  componentDidMount() {
+    const apiUrl = 'http://localhost:51255/api/todo';
+    fetch(apiUrl)
+    .then((response) => response.json())
+    .then(json => console.log(json))
+  }
+  /* fetch example end */
+
   render() {
     return (
       <Container className="row flex-center flex-middle">

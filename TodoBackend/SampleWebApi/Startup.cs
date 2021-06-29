@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Net.Http.Headers;
+using System.Web.Http;
 using Microsoft.Owin;
 using Ninject;
 using Ninject.Web.Common;
@@ -17,6 +18,9 @@ namespace SampleWebApi
             {
                 DependencyResolver = new NinjectResolver(CreateKernel())
             };
+
+            config.Formatters.JsonFormatter.SupportedMediaTypes
+                .Add(new MediaTypeHeaderValue("text/html"));
 
             config.MapHttpAttributeRoutes();
 
