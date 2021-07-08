@@ -28,8 +28,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-
-
 const List = styled.ul`
     padding-left: 0
 `;

@@ -27,7 +27,7 @@ class App extends Component {
     .then((response) => response.json())
     .then(json => console.log(json))
   }
-  /* fetch example end */
+  /* fetch example start */
 
   render() {
     return (

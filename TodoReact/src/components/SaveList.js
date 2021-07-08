@@ -9,7 +9,16 @@ class SaveList extends React.Component {
                         <form
                             onSubmit={e => {
                                 e.preventDefault();
-            
+                                const requestOptions = {
+                                    method: 'PUT',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ name: 'List 1', list: null})
+                                };
+                                  const apiUrl = 'http://localhost:51255/api/todo';
+                                  
+                                  fetch(apiUrl, requestOptions)
+                                  .then((response) => response.json())
+                                  .then(json => console.log(json))
                             }}
                             className="row"
                         >

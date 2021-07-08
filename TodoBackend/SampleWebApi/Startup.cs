@@ -2,8 +2,9 @@
 using System.Web.Http;
 using Microsoft.Owin;
 using Ninject;
-using Ninject.Web.Common;
 using Owin;
+using SampleWebApi.Interfaces;
+using SampleWebApi.Services;
 using WebApiContrib.IoC.Ninject;
 
 [assembly: OwinStartup(typeof(SampleWebApi.Startup))]
@@ -23,7 +24,7 @@ namespace SampleWebApi
                 .Add(new MediaTypeHeaderValue("text/html"));
 
             config.MapHttpAttributeRoutes();
-
+            
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
@@ -36,8 +37,9 @@ namespace SampleWebApi
         public static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
+            kernel.Bind<IListService>().ToConstant(new ListService());
 
-           // kernel.Bind<IService>().ToConstant(new Service());
+            // kernel.Bind<IService>().ToConstant(new Service());
 
             return kernel;
         }

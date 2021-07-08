@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
+using SampleWebApi.Interfaces;
 using SampleWebApi.Models;
 
 namespace SampleWebApi.Controllers
@@ -7,22 +9,25 @@ namespace SampleWebApi.Controllers
     [RoutePrefix("api/todo")]
     public class TodoController : ApiController
     {
+        private readonly IListService _listService;
 
-        public TodoController()
+        public TodoController(IListService listService)
         {
+            _listService = listService;
         }
 
         [HttpGet]
-        [Route("")]
-        public IHttpActionResult Get()
+        [Route("{name}")]
+        public async Task<ListEntity> GetList(string name)
         {
-            List<TodoEntity> result = new List<TodoEntity>()
-            {
-                new TodoEntity(){Text = "Example Task 1"},
-                new TodoEntity(){Text = "Example Task 2"},
-            };
+            return await _listService.GetList(name);
+        }
 
-            return Ok(result);
+        [HttpPost]
+        [Route()]
+        public async Task SaveList(ListEntity listEntity)
+        {
+            await _listService.SaveList(listEntity);
         }
     }
 }
